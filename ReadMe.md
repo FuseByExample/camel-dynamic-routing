@@ -159,7 +159,7 @@ For the purposes of this example, we will create a single parent profile called 
 will be shared (parent profile of) the 2 service profiles: `example-dynamic-routing-base` and
 `example-dynamic-routing-newservice`.
 
-Select the `Profile` tab, and push the `Create Profile` button on upper right. You will be prompted to enter a name,
+Select the `Profiles` tab, and push the `Create Profile` button on upper right. You will be prompted to enter a name,
 and select zero or more Parent Profiles. Follow the details below to create the three target Profiles:
 
 Name: `example-dynamic-routing-parent`  
