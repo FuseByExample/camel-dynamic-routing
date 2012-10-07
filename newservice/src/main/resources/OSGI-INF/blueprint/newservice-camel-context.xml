@@ -36,7 +36,11 @@
         </cm:default-properties>
     </cm:property-placeholder>
 
-    <amq:broker brokerName="newservice-broker" persistent="false" useJmx="false"/>
+    <amq:broker brokerName="newservice-broker" persistent="false">
+        <amq:managementContext>
+            <amq:managementContext createConnector="false"/>
+        </amq:managementContext>
+    </amq:broker>
 
     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="brokerURL" value="vm://newservice-broker?create=false"/>
