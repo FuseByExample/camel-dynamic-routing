@@ -42,23 +42,19 @@
         <property name="brokerURL" value="vm://newservice-broker?create=false"/>
     </bean>
 
-    <camelContext xmlns="http://camel.apache.org/schema/blueprint"
-                  id="newservice-camel-context"
-                  streamCache="true"
-                  trace="false">
-        <route id="newservice-route">
-            <from uri="vm:newservice"/>
-            <log logName="newservice-route" message="Message: ${body}"/>
-            <inOnly uri="{{endpointUri}}"/>
-            <transform id="NewServiceResponse">
-                <simple>New Service Response: ${body}</simple>
-            </transform>
-        </route>
-
-        <route id="newservice-consumer">
-            <from uri="{{endpointUri}}"/>
-            <log logName="newservice-consumer" message="Consumer: ${body}"/>
-        </route>
-    </camelContext>
+    <camelContext streamCache="true" trace="false" id="newservice-camel-context" xmlns="http://camel.apache.org/schema/blueprint">
+    <route id="newservice-route">
+        <from uri="vm:newservice"/>
+        <log logName="newservice-route" message="Message: ${body}"/>
+        <inOnly uri="{{endpointUri}}"/>
+        <transform id="NewServiceResponse">
+            <simple>New Service Response: ${body}</simple>
+        </transform>
+    </route>
+    <route id="newservice-consumer">
+        <from uri="{{endpointUri}}"/>
+        <log logName="newservice-consumer" message="Consumer: ${body}"/>
+    </route>
+</camelContext>
 
 </blueprint>

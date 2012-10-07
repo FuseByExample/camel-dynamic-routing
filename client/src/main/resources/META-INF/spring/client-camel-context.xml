@@ -25,18 +25,16 @@
        ">
 
     <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
-        <propertyPlaceholder id="properties"
-                             location="classpath:test.properties"/>
-
-        <route>
-            <from uri="timer:test"/>
-            <setBody>
-                <constant>{{endpointuri}}</constant>
-            </setBody>
-            <log message="Sending: ${body}"/>
-            <to uri="jetty:http://{{host}}:{{port}}/base"/>
-            <log message="Received: ${body}"/>
-        </route>
-    </camelContext>
+    <propertyPlaceholder location="classpath:test.properties" id="properties"/>
+    <route>
+        <from uri="timer:test"/>
+        <setBody>
+            <constant>{{endpointuri}}</constant>
+        </setBody>
+        <log message="Sending: ${body}"/>
+        <to uri="jetty:http://{{host}}:{{port}}/base"/>
+        <log message="Received: ${body}"/>
+    </route>
+</camelContext>
 
 </beans>

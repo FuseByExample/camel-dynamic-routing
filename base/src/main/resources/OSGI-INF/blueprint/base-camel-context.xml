@@ -35,35 +35,31 @@
         </cm:default-properties>
     </cm:property-placeholder>
 
-    <camelContext xmlns="http://camel.apache.org/schema/blueprint"
-                  id="baseCamelContext"
-                  streamCache="true"
-                  trace="false">
-        <propertyPlaceholder id="properties" location="blueprint:myblueprint.placeholder"/>
-
-        <route id="baseRoute" streamCache="true">
-            <from uri="jetty:http://{{host}}:{{port}}/base" id="BaseWSListener">
-                <description/>
-            </from>
-            <log logName="Base" message="Processing: ${body}"/>
-            <recipientList delimiter=",">
-                <simple>${bodyAs(java.lang.String)}</simple>
-            </recipientList>
-        </route>
-        <route id="simpleRoute">
-            <from uri="direct:simple"/>
-            <log logName="Simple" message="Processing: ${body}"/>
-            <transform id="SimpleResponse">
-                <simple>Simple Response: ${body}</simple>
-            </transform>
-        </route>
-        <route id="otherRoute">
-            <from uri="direct:other"/>
-            <log logName="Other" message="Processing: ${body}"/>
-            <transform id="OtherResponse">
-                <simple>Other Response: ${body}</simple>
-            </transform>
-        </route>
-    </camelContext>
+    <camelContext streamCache="true" trace="false" id="baseCamelContext" xmlns="http://camel.apache.org/schema/blueprint">
+    <propertyPlaceholder location="blueprint:myblueprint.placeholder" id="properties"/>
+    <route streamCache="true" id="baseRoute">
+        <from uri="jetty:http://{{host}}:{{port}}/base" id="BaseWSListener">
+            <description/>
+        </from>
+        <log logName="Base" message="Processing: ${body}"/>
+        <recipientList delimiter=",">
+            <simple>${bodyAs(java.lang.String)}</simple>
+        </recipientList>
+    </route>
+    <route id="simpleRoute">
+        <from uri="direct:simple"/>
+        <log logName="Simple" message="Processing: ${body}"/>
+        <transform id="SimpleResponse">
+            <simple>Simple Response: ${body}</simple>
+        </transform>
+    </route>
+    <route id="otherRoute">
+        <from uri="direct:other"/>
+        <log logName="Other" message="Processing: ${body}"/>
+        <transform id="OtherResponse">
+            <simple>Other Response: ${body}</simple>
+        </transform>
+    </route>
+</camelContext>
 
 </blueprint>
