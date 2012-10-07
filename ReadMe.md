@@ -42,10 +42,10 @@ This example will be deploying into [Fuse ESB][]. Follow the instructions to dow
 
 Below are a sequence of steps that highlight the core concepts:
 
-1. [Install Base Service](#installbaseservice)
-2. [Test Base Service](#testingbaseservice)
-3. [Deploy Newservice Service](#deployingnewserviceservice)
-4. [Test Base Service now able to route to both existing and new](#testingnewserviceservice)
+1. Install Base Service
+2. Test Base Service
+3. Deploy Newservice Service
+4. Test Base Service now able to route to both existing and new
 
 ### 1. Install Base Service
 
