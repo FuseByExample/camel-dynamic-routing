@@ -32,6 +32,31 @@ and [Fuse Management Console][].
 
 ---
 
+### Requirements:
+
+* Fuse ESB 7.0.2 or later (http://fusesource.com/downloads/)
+* Fuse Management Console 7.0.2 or later (http://fusesource.com/downloads/)
+* Maven 2.2.1 or 3.0 (http://maven.apache.org/)
+* Java SE 6
+
+### Notes:
+
+* if you see linkage errors related to javax.activation.DataHandler, you may need to edit Fuse ESB's
+ `etc/jre.properties` file, and add javax.activation to the list of packages exported by the base
+ bundle by uncommenting (remote the leading '#') the javax.activation line.
+
+    jre-1.6= \
+      javax.accessibility, \
+      javax.activation;version="1.1", \
+      javax.activity, \
+      ....
+
+* In Fuse ESB, make sure that you've added a smx/smx userid and password to
+ `<Fuse ESB Home>/etc/users.properties`, or update the included Camel route to the userid and
+ password you have defined for the Fuse ESB embedded ActiveMQ.
+
+---
+
 ## Building and Running
 
 To build this project use [Apache Maven][] in the base directory of this project

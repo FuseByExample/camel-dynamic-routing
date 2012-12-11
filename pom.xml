@@ -1,6 +1,6 @@
 <!--
-  ~ Copyright (C) FuseSource, Inc.
-  ~ http://fusesource.com
+  ~ Copyright (C) Red Hat, Inc.
+  ~ http://www.redhat.com
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -27,6 +27,20 @@
 
     <name>Dynamic Routing</name>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Red Hat</name>
+        <url>http://redhat.com</url>
+    </organization>
+
     <modules>
         <module>base</module>
         <module>client</module>
@@ -37,9 +51,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <activemq.version>5.5.1.fuse-70-084</activemq.version>
-        <camel.version>2.9.0.fuse-70-084</camel.version>
-        <cxf.version>2.5.0.fuse-70-084</cxf.version>
+        <activemq.version>5.5.1.fuse-70-097</activemq.version>
+        <camel.version>2.9.0.fuse-70-097</camel.version>
+        <cxf.version>2.5.0.fuse-70-097</cxf.version>
 
         <slf4j.version>1.6.1</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
@@ -47,31 +61,31 @@
 
     <repositories>
         <repository>
-            <id>release.fusesource.org</id>
+            <id>fusesource.releases</id>
             <name>FuseSource Release Repository</name>
-            <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <url>http://repo.fusesource.com/nexus/content/repositories/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
-
     <pluginRepositories>
         <pluginRepository>
-            <id>release.fusesource.org</id>
+            <id>fusesource.releases</id>
             <name>FuseSource Release Repository</name>
-            <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <url>http://repo.fusesource.com/nexus/content/repositories/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
 
     <dependencyManagement>
         <dependencies>
