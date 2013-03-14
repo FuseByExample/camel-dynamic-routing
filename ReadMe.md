@@ -34,8 +34,8 @@ and [Fuse Management Console][].
 
 ### Requirements:
 
-* Fuse ESB 7.0.2 or later (http://fusesource.com/downloads/)
-* Fuse Management Console 7.0.2 or later (http://fusesource.com/downloads/)
+* Fuse ESB 7.1.0 or later (https://access.redhat.com/jbossnetwork - registration required)
+* Fuse Management Console 7.1.0 or later (https://access.redhat.com/jbossnetwork - registration required)
 * Maven 2.2.1 or 3.0 (http://maven.apache.org/)
 * Java SE 6
 
