@@ -17,17 +17,18 @@
   ~ limitations under the License.
   -->
 
-<features name="dynamic-routing-newservice-${project.version}"
-          xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0">
-    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
-    <repository>mvn:org.apache.activemq/activemq-karaf/${activemq.version}/xml/features</repository>
+<features name="dynamic-routing-base-${project.version}">
+
+    <feature name="dynamic-routing-base" description="Dynamic Routing :: Base Service" version="${project.version}">
+        <feature version="${camel.version}">camel-jetty</feature>
+        <bundle>mvn:org.fusesource.example.dynamic/base/0.0.1-SNAPSHOT</bundle>
+    </feature>
 
     <feature name="dynamic-routing-newservice" description="Dynamic Routing :: New Service Service" version="${project.version}">
         <feature version="${activemq.version}">activemq-camel</feature>
         <feature version="${activemq.version}">activemq-blueprint</feature>
-        <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
+        <feature version="${activemq.version}">activemq</feature>
+        <bundle>mvn:org.fusesource.example.dynamic/base/0.0.1-SNAPSHOT</bundle>
+        <bundle>mvn:org.fusesource.example.dynamic/newservice/0.0.1-SNAPSHOT</bundle>
     </feature>
-
 </features>
