@@ -52,9 +52,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <activemq.version>5.8.0.redhat-60020</activemq.version>
-        <camel.version>2.10.0.redhat-60020</camel.version>
-        <cxf.version>2.6.0.redhat-60020</cxf.version>
+        <activemq.version>5.8.0.redhat-60024</activemq.version>
+        <camel.version>2.10.0.redhat-60024</camel.version>
+        <cxf.version>2.6.0.redhat-60024</cxf.version>
 
         <slf4j.version>1.6.1</slf4j.version>
         <log4j.version>1.2.16</log4j.version>

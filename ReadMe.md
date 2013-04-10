@@ -96,10 +96,10 @@ Then in a different Command Prompt, change to the `client` sub-project, and run
 
 You should see log entries in both JBoss Fuse console, and the Command Prompt that messages are flowing to the Simple Route
 
-    18:37:45,126 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:simple
-    18:37:45,127 | INFO  | qtp317981251-233 | Simple                           | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:simple
-    18:37:46,043 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:simple
-    18:37:46,043 | INFO  | qtp317981251-232 | Simple                           | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:simple
+    18:37:45,126 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
+    18:37:45,127 | INFO  | qtp317981251-233 | Simple                           | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
+    18:37:46,043 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
+    18:37:46,043 | INFO  | qtp317981251-232 | Simple                           | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
 
 You can also try the Other route to see that the recipient list is working correctly within the Base service
 
@@ -107,10 +107,10 @@ You can also try the Other route to see that the recipient list is working corre
 
 with the following log output
 
-    18:39:59,483 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:other
-    18:39:59,484 | INFO  | qtp317981251-232 | Other                            | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:other
-    18:40:00,399 | INFO  | qtp317981251-235 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:other
-    18:40:00,400 | INFO  | qtp317981251-235 | Other                            | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: direct:other
+    18:39:59,483 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
+    18:39:59,484 | INFO  | qtp317981251-232 | Other                            | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
+    18:40:00,399 | INFO  | qtp317981251-235 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
+    18:40:00,400 | INFO  | qtp317981251-235 | Other                            | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
 
 ### 3. Deploying Newservice Service
 
@@ -127,12 +127,12 @@ Then in a different Command Prompt, change to the `client` sub-project, and run
 You should see log entries in both JBoss Fuse console, and the Command Prompt that messages are flowing to the New Service
 Route
 
-    18:41:51,479 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: vm:newservice
-    18:41:51,480 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Message: vm:newservice
-    18:41:51,489 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Consumer: vm:newservice
-    18:41:52,394 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Processing: vm:newservice
-    18:41:52,396 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Message: vm:newservice
-    18:41:52,399 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60020 | Consumer: vm:newservice
+    18:41:51,479 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: vm:newservice
+    18:41:51,480 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Message: vm:newservice
+    18:41:51,489 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Consumer: vm:newservice
+    18:41:52,394 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: vm:newservice
+    18:41:52,396 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Message: vm:newservice
+    18:41:52,399 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Consumer: vm:newservice
 
 Notice that the original Base service did not reload or restart to start forwarding messages to the newly loaded routes.
 You can re-run the original tests against `mvn -Psimple` and `mvn -Pother` to see that those still work correctly.
