@@ -162,9 +162,22 @@ To start the management console, install the `fabric-webui` feature from the Fus
 
     features:install fabric-webui
 
-Once the server has started, and you see the Management Console prompt, open a web browser and go to
-<http://localhost:8181/>. Click the `Create` button if this is your first time running, and login (default
-username/passwd is admin/admin).
+Once the server has started, open a web browser and go to <http://localhost:8181/>.
+
+![Management console: welcome](doc/webui_welcome.png)
+
+Click the `Create` button if this is your first time running and configure a `Username` and `Password` and an optional `ZooKeeper Password`
+for the ensemble server. Since we're only going to use the local system to host our containers, you can skip the other fields.
+
+![Management console: register](doc/webui_register.png)
+
+Click the `Create` button and log in with your brand new credentials
+
+![Management console: sign in](doc/webui_signin.png)
+
+Once you're logged in you can see the tab-bar at the top, the list of containers on the left and some container information on the right.
+
+![Management console: containers](doc/webui_containers.png)
 
 ### Create Profiles
 
@@ -180,20 +193,35 @@ will be shared (parent profile of) the 2 service profiles: `example-dynamic-rout
 `example-dynamic-routing-newservice`.
 
 Select the `Profiles` tab, and push the `Create Profile` button on upper right. You will be prompted to enter a name,
-and select zero or more Parent Profiles. Follow the details below to create the three target Profiles:
+and select zero or more Parent Profiles.
+
+![Management console: create profile](doc/webui_createprofile.png)
+
+Follow the details below to create the three target Profiles:
 
 Name: `example-dynamic-routing-parent`  
 Parent Profiles: `camel` and `karaf`  
 
 Name: `example-dynamic-routing-base`  
 Parent Profiles: `example-dynamic-routing-parent`  
-Repositories: `mvn:org.fusesource.example.dynamic/base/0.0.1-SNAPSHOT/xml/features`  
-Features: `dynamic-routing-base`
 
 Name: `example-dynamic-routing-newservice`  
 Parent Profiles: `example-dynamic-routing-parent`  
-Repositories: `mvn:org.fusesource.example.dynamic/newservice/0.0.1-SNAPSHOT/xml/features`  
-Features: `dynamic-routing-newservice`  
+
+To edit the `example-dynamic-routing-base` settings, select the profile from the profiles list in the profiles tab.
+Head to the `Repositories` tab and add the `mvn:org.fusesource.example.dynamic/base/0.0.1-SNAPSHOT/xml/features`
+repository.
+
+![Management console: add repository](doc/webui_addrepository.png)
+
+Browse to the `Features` tab and select the repository you just added. The `dynamic-routing-base` feature will appear
+at the bottom. Add this feature by clicking the `+` button on the right.
+
+![Management console: add feature](doc/webui_addfeature.png)
+
+Repeat this for the `example-dynamic-routing-newservice` profile. Add the
+`mvn:org.fusesource.example.dynamic/newservice/0.0.1-SNAPSHOT/xml/features` repository so you can add the
+`dynamic-routing-newservice` feature.
 
 ### Creating Container
 
@@ -202,10 +230,17 @@ Container is initially a minimal [Apache Karaf][] instance with a Fuse Fabric ag
 we will create a single Container that we will first deploy the Base service to, test it, and then deploy Newservice,
 and test both.
 
-Select the `Containers` tab, and press the `Create Fuse Container` button. You will be prompted to enter a name (e.g.
-`Dynamic-Routing`). Press `Next` in the lower right. You will then be prompted to select the zero or more Profiles to
-initial provision the container with. Select `example-dynamic-routing-base`, and press `Next`. Leave the defaults for
-now, and press `Next` and then `Finish`.
+Select the `Containers` tab, and press the `Create Container` button. You will be prompted to enter a name (e.g.
+`Dynamic-Routing`). 
+
+![Management console: create container](doc/webui_createcontainer.png)
+
+Press `Next` in the lower right. You will then be prompted to select the zero or more Profiles to
+initial provision the container with. Select `example-dynamic-routing-base`, and press `Next`. 
+
+![Management console: create container](doc/webui_createcontainerbis.png)
+
+At th next form leave the defaults for now, and press `Next` and then `Finish`.
 
 At this point, it will create a new Container instance, and initially provision it with our example-dynamic-routing-base
 Profile (i.e. deploy the Base service OSGi bundle). You can verify that it is running correctly by, from a separate
