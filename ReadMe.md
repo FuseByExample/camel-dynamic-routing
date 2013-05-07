@@ -1,5 +1,8 @@
 # Camel and JBoss Fuse Dynamic Routing Example
 
+If you want to deploy ths example using fabric, please follow the instructions described in 
+the [Managing a Deployment using Fuse Fabric](Fabric.md) guide.
+
 ## Overview
 
 This example shows how to use [Apache Camel][], and its OSGi integration to dynamically route messages to new or updated
@@ -12,6 +15,10 @@ OSGi bundles running in the same Java virtual machine.
 
 Note: Extra steps, like use of Camel VM Component, need to be taken when accessing Camel Routes in different Camel
 Contexts, and in different OSGi bundles, as you are dealing with classes in different ClassLoaders...
+
+The example further is explained by the following EIP diagram:
+
+![Dynamic Routing Example: EIP Diagram](doc/EIP_diagram.png)
 
 ### Alternative Approaches
 
@@ -140,82 +147,6 @@ You can re-run the original tests against `mvn -Psimple` and `mvn -Pother` to se
 Newservice grabs the messages from the Camel VM component, and puts them onto (and off of) an ActiveMQ Queue. This shows
 how to route to new endpoints and integration routes at runtime -- it does not have to be ActiveMQ, it could easily be
 WS, REST, other JMS (Tibco, WMQ), etc.
-
----
-
-## Managing a Deployment using Fuse Fabric
-
-### Overview
-
-[Fuse Fabric][] is a runtime environment that leverages capabilities of [Apache Karaf][], the container underlying JBoss
-Fuse, to provide centralized configuration and provisioning capabilities. In brief, [Fuse Fabric][]
-provides the ability to create container instances running locally or remotely, including on cloud environments like
-Amazon EC2 and Rackspace. You can then create and apply Profiles that define what OSGi bundles and associated
-configurations (name / value pairs) to apply to each managed container.
-
-Management Console provides a web-based user interface to make it easier to interact with Fuse Fabric than
-Fabric’s provided command-line interface.
-
-### Setup and Testing
-
-To start the management console, install the `fabric-webui` feature from the Fuse console.
-
-    features:install fabric-webui
-
-Once the server has started, and you see the Management Console prompt, open a web browser and go to
-<http://localhost:8181/>. Click the `Create` button if this is your first time running, and login (default
-username/passwd is admin/admin).
-
-### Create Profiles
-
-*Profiles* have an inheritance concept where parent profile’s configuration and bundles are applied fully before the
-child profiles. It is a good practice to create parent profiles for common configurations shared across your
-applications. Using parent profiles can also help ensure dependent bundles are fully deployed **before** child profile
-bundles. To be clear, Fuse Fabric only has a single concept called *Profile*, and they act as parent or child purely
-based on their relationship to other profiles, that is when you create a profile you can specify zero of more other
-profiles (which may also have parent profiles) to be the parent of the profile you are creating.
-
-For the purposes of this example, we will create a single parent profile called `example-dynamic-routing-parent` that
-will be shared (parent profile of) the 2 service profiles: `example-dynamic-routing-base` and
-`example-dynamic-routing-newservice`.
-
-Select the `Profiles` tab, and push the `Create Profile` button on upper right. You will be prompted to enter a name,
-and select zero or more Parent Profiles. Follow the details below to create the three target Profiles:
-
-Name: `example-dynamic-routing-parent`  
-Parent Profiles: `camel` and `karaf`  
-
-Name: `example-dynamic-routing-base`  
-Parent Profiles: `example-dynamic-routing-parent`  
-Repositories: `mvn:org.fusesource.example.dynamic/base/0.0.1-SNAPSHOT/xml/features`  
-Features: `dynamic-routing-base`
-
-Name: `example-dynamic-routing-newservice`  
-Parent Profiles: `example-dynamic-routing-parent`  
-Repositories: `mvn:org.fusesource.example.dynamic/newservice/0.0.1-SNAPSHOT/xml/features`  
-Features: `dynamic-routing-newservice`  
-
-### Creating Container
-
-Fuse Fabric allows you to create managed Containers to which you can deploy one or more profiles. A managed
-Container is initially a minimal [Apache Karaf][] instance with a Fuse Fabric agent bundle deployed. For this example,
-we will create a single Container that we will first deploy the Base service to, test it, and then deploy Newservice,
-and test both.
-
-Select the `Containers` tab, and press the `Create Fuse Container` button. You will be prompted to enter a name (e.g.
-`Dynamic-Routing`). Press `Next` in the lower right. You will then be prompted to select the zero or more Profiles to
-initial provision the container with. Select `example-dynamic-routing-base`, and press `Next`. Leave the defaults for
-now, and press `Next` and then `Finish`.
-
-At this point, it will create a new Container instance, and initially provision it with our example-dynamic-routing-base
-Profile (i.e. deploy the Base service OSGi bundle). You can verify that it is running correctly by, from a separate
-Command Prompt, running the test client : `mvn -Psimple` and `mvn -Pother`. In the upper right of the Container tab, you
-can select the `Detail` button to see more information on the deployed Container, including drilling into seeing the
-deployed Camel routes.
-
-To deploy newservice, push the `Add Profiles` button with your created Container, and add
-`example-dynamic-routing-newservice`. This will provision the newservice bundle to the running Container, and you can
-verify that it is running by trying the test client `mvn -Pnewservice`
 
 
 [Apache Camel]: http://camel.apache.org
