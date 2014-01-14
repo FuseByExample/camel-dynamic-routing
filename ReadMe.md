@@ -41,9 +41,9 @@ and Management Console.
 
 ### Requirements:
 
-* JBoss Fuse 6.0.0 or later (https://access.redhat.com/jbossnetwork - registration required)
+* JBoss Fuse 6.1.0 or later (https://access.redhat.com/jbossnetwork - registration required)
 * Maven 2.2.1 or 3.0 (http://maven.apache.org/)
-* Java SE 6
+* Java SE 6 or Java SE 7
 
 ### Notes:
 
