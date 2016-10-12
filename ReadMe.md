@@ -41,23 +41,13 @@ and Management Console.
 
 ### Requirements:
 
-* JBoss Fuse 6.2.0 or later (https://access.redhat.com/jbossnetwork - registration required)
-* Maven 2.2.1 or 3.0 (http://maven.apache.org/)
+* JBoss Fuse 6.3.0 or later (https://access.redhat.com/jbossnetwork - registration required)
+* Maven 3.2.3 or newer (http://maven.apache.org/)
 * Java SE 7 or Java SE 8
 
 ### Notes:
 
-* if you see linkage errors related to javax.activation.DataHandler, you may need to edit JBoss Fuse's
- `etc/jre.properties` file, and add javax.activation to the list of packages exported by the base
- bundle by uncommenting (remote the leading '#') the javax.activation line.
-
-    jre-1.6= \
-      javax.accessibility, \
-      javax.activation;version="1.1", \
-      javax.activity, \
-      ....
-
-* In JBoss Fuse, make sure that you've added a smx/smx userid and password to
+* In JBoss Fuse, make sure that you've added a admin/admin userid and password to
  `<JBoss Fuse Home>/etc/users.properties`, or update the included Camel route to the userid and
  password you have defined for the JBoss Fuse embedded ActiveMQ.
 
@@ -73,12 +63,18 @@ This example will be deploying into [JBoss Fuse][]. Follow the instructions to d
 
 Below are a sequence of steps that highlight the core concepts:
 
-1. Install Base Service
-2. Test Base Service
-3. Deploy Newservice Service
-4. Test Base Service now able to route to both existing and new
+1. Install the activemq-blueprint feature
+2. Install Base Service
+3. Test Base Service
+4. Deploy Newservice Service
+5. Test Base Service now able to route to both existing and new
 
-### 1. Install Base Service
+### 1. Install the activemq-blueprint feature
+
+    features:addUrl mvn:org.apache.activemq/activemq-karaf/5.11.0.redhat-630187/xml/features
+    features:install activemq-blueprint
+
+### 2. Install Base Service
 
 Within the Base Camel route there are 3 routes:
 
@@ -95,7 +91,7 @@ In the JBoss Fuse console, do the following
     features:addurl mvn:org.fusesource.example.dynamic/features/0.0.1-SNAPSHOT/xml/features
     features:install dynamic-routing-base
 
-### 2. Testing Base Service
+### 3. Testing Base Service
 
 Then in a different Command Prompt, change to the `client` sub-project, and run
 
@@ -103,10 +99,10 @@ Then in a different Command Prompt, change to the `client` sub-project, and run
 
 You should see log entries in both JBoss Fuse console, and the Command Prompt that messages are flowing to the Simple Route
 
-    18:37:45,126 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
-    18:37:45,127 | INFO  | qtp317981251-233 | Simple                           | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
-    18:37:46,043 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
-    18:37:46,043 | INFO  | qtp317981251-232 | Simple                           | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:simple
+    18:37:45,126 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:simple
+    18:37:45,127 | INFO  | qtp317981251-233 | Simple                           | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:simple
+    18:37:46,043 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:simple
+    18:37:46,043 | INFO  | qtp317981251-232 | Simple                           | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:simple
 
 You can also try the Other route to see that the recipient list is working correctly within the Base service
 
@@ -114,18 +110,18 @@ You can also try the Other route to see that the recipient list is working corre
 
 with the following log output
 
-    18:39:59,483 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
-    18:39:59,484 | INFO  | qtp317981251-232 | Other                            | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
-    18:40:00,399 | INFO  | qtp317981251-235 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
-    18:40:00,400 | INFO  | qtp317981251-235 | Other                            | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: direct:other
+    18:39:59,483 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:other
+    18:39:59,484 | INFO  | qtp317981251-232 | Other                            | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:other
+    18:40:00,399 | INFO  | qtp317981251-235 | Base                             | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:other
+    18:40:00,400 | INFO  | qtp317981251-235 | Other                            | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: direct:other
 
-### 3. Deploying Newservice Service
+### 4. Deploying Newservice Service
 
 In the JBoss Fuse console, do the following
 
     features:install dynamic-routing-newservice
 
-### 4. Testing Newservice Service
+### 5. Testing Newservice Service
 
 Then in a different Command Prompt, change to the `client` sub-project, and run
 
@@ -134,12 +130,12 @@ Then in a different Command Prompt, change to the `client` sub-project, and run
 You should see log entries in both JBoss Fuse console, and the Command Prompt that messages are flowing to the New Service
 Route
 
-    18:41:51,479 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: vm:newservice
-    18:41:51,480 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Message: vm:newservice
-    18:41:51,489 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Consumer: vm:newservice
-    18:41:52,394 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Processing: vm:newservice
-    18:41:52,396 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Message: vm:newservice
-    18:41:52,399 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.10.0.redhat-60024 | Consumer: vm:newservice
+    18:41:51,479 | INFO  | qtp317981251-233 | Base                             | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: vm:newservice
+    18:41:51,480 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Message: vm:newservice
+    18:41:51,489 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Consumer: vm:newservice
+    18:41:52,394 | INFO  | qtp317981251-232 | Base                             | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Processing: vm:newservice
+    18:41:52,396 | INFO  |  vm://newservice | newservice-route                 | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Message: vm:newservice
+    18:41:52,399 | INFO  | umer[newservice] | newservice-consumer              | 139 - org.apache.camel.camel-core - 2.17.0.redhat-630187 | Consumer: vm:newservice
 
 Notice that the original Base service did not reload or restart to start forwarding messages to the newly loaded routes.
 You can re-run the original tests against `mvn -Psimple` and `mvn -Pother` to see that those still work correctly.

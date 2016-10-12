@@ -25,7 +25,7 @@
     </feature>
 
     <feature name="dynamic-routing-newservice" description="Dynamic Routing :: New Service Service" version="${project.version}">
-        <feature version="${activemq.version}">activemq-camel</feature>
+        <feature version="${fabric.version}">activemq-camel</feature>
         <feature version="${activemq.version}">activemq-blueprint</feature>
         <feature version="${activemq.version}">activemq</feature>
         <bundle>mvn:org.fusesource.example.dynamic/base/0.0.1-SNAPSHOT</bundle>
